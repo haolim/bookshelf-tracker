@@ -1,0 +1,147 @@
+/* ==========================================================================
+   AddBookForm.module.css
+   import styles from "./AddBookForm.module.css";
+   Classes: form, heading, grid, field, fieldWide, label, input, select,
+            footer, hint, submitButton, error
+   ========================================================================== */
+
+.form {
+  padding: var(--space-5);
+  background-color: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.heading {
+  font-size: 1.125rem;
+  margin-bottom: var(--space-4);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* Title spans both columns; author and status share the second row. */
+.fieldWide {
+  grid-column: 1 / -1;
+}
+
+.label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--ink-soft);
+}
+
+.input,
+.select {
+  width: 100%;
+  padding: 10px 12px;
+  background-color: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  font-size: 0.9375rem;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.input::placeholder {
+  color: #b6adc2;
+}
+
+.input:hover,
+.select:hover {
+  border-color: var(--lilac);
+}
+
+.input:focus,
+.select:focus {
+  outline: none;
+  border-color: var(--lilac-deep);
+  box-shadow: 0 0 0 3px var(--lilac-wash);
+}
+
+/* Custom chevron so the select matches the pastel inputs on every browser. */
+.select {
+  appearance: none;
+  padding-right: 36px;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%236f5194' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-top: var(--space-5);
+}
+
+.hint {
+  color: var(--ink-soft);
+  font-size: 0.8125rem;
+}
+
+.submitButton {
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  background-color: var(--lilac);
+  color: #3a2c4d;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-card);
+  transition:
+    background-color 0.15s ease,
+    box-shadow 0.15s ease,
+    transform 0.12s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #b9a1dd;
+  box-shadow: var(--shadow-lift);
+}
+
+.submitButton:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.submitButton:disabled {
+  background-color: #ded4ec;
+  color: #8d84a0;
+  box-shadow: none;
+}
+
+.error {
+  margin-top: var(--space-4);
+  padding: 10px 14px;
+  background-color: var(--blush);
+  border-radius: var(--radius-sm);
+  color: var(--blush-deep);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+@media (max-width: 32rem) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer {
+    flex-direction: column-reverse;
+    align-items: stretch;
+    text-align: center;
+  }
+
+  .submitButton {
+    width: 100%;
+  }
+}

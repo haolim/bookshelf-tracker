@@ -1,0 +1,34 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "The Pragmatic Programmer",
+      "author": "David Thomas & Andrew Hunt",
+      "status": "finished"
+    },
+    {
+      "id": 2,
+      "title": "Atomic Habits",
+      "author": "James Clear",
+      "status": "reading"
+    },
+    {
+      "id": 3,
+      "title": "Dune",
+      "author": "Frank Herbert",
+      "status": "to-read"
+    },
+    {
+      "id": 4,
+      "title": "Sapiens",
+      "author": "Yuval Noah Harari",
+      "status": "finished"
+    },
+    {
+      "id": 5,
+      "title": "Clean Code",
+      "author": "Robert C. Martin",
+      "status": "to-read"
+    }
+  ]
+}

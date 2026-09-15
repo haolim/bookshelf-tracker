@@ -1,34 +1,53 @@
 {
   "books": [
     {
-      "id": 1,
-      "title": "The Pragmatic Programmer",
-      "author": "David Thomas & Andrew Hunt",
+      "id": "2",
+      "title": "Atomic Habits",
+      "author": "James Clear",
       "status": "finished"
     },
     {
-      "id": 2,
-      "title": "Atomic Habits",
-      "author": "James Clear",
-      "status": "reading"
-    },
-    {
-      "id": 3,
+      "id": "3",
       "title": "Dune",
       "author": "Frank Herbert",
-      "status": "to-read"
+      "status": "finished"
     },
     {
-      "id": 4,
+      "id": "4",
       "title": "Sapiens",
       "author": "Yuval Noah Harari",
       "status": "finished"
     },
     {
-      "id": 5,
+      "id": "5",
       "title": "Clean Code",
       "author": "Robert C. Martin",
       "status": "to-read"
+    },
+    {
+      "title": "Book A",
+      "author": "Author A",
+      "status": "reading",
+      "id": "qcFqoT3Z5GA"
+    },
+    {
+      "title": "Book B",
+      "author": "Author B",
+      "status": "to-read",
+      "id": "QRWUX09fSRM"
+    },
+    {
+      "title": "Book C",
+      "author": "Author C",
+      "status": "reading",
+      "id": "Y06wyDExbGg"
+    },
+    {
+      "title": "Book D",
+      "author": "Author D",
+      "status": "to-read",
+      "id": "aXyD0EOFXcY"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -19,8 +19,10 @@ export default function AddBookForm({ onAdd, isAdding }) {
       status: form.status,
     });
 
-    if (ok) setForm(emptyForm);
-    setShowAddForm(false);
+    if (ok) {
+      setForm(emptyForm);
+      setShowAddForm(false);
+    }
   };
 
   return (

@@ -14,18 +14,20 @@
   font-size: 1.75rem;
 }
 
-.app-subtitle {
-  margin-top: 4px;
-  color: var(--ink-soft);
-  font-size: 0.9375rem;
-}
-
 .app-section {
   margin-top: 28px;
 }
 
 .app-section-title {
   font-size: 1.125rem;
+  margin-bottom: 12px;
+}
+
+.app-section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
   margin-bottom: 12px;
 }
 

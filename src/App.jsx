@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./App.css";
+import BookList from "./components/BookList";
 
 const API_BASE = "http://localhost:3001";
 
@@ -8,6 +9,8 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [isError, setIsError] = useState(false);
+  const [deletingBookId, setDeletingBookId] = useState(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     const loadBooks = async () => {
@@ -39,6 +42,55 @@ function App() {
     loadBooks();
   }, []);
 
+  const handleDelete = async (bookId) => {
+    if (!window.confirm("Are you sure you want to delete this book?")) return;
+
+    setDeletingBookId(bookId);
+    setIsDeleting(true);
+
+    // Set a delay
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    try {
+      const response = await fetch(`${API_BASE}/books/${bookId}`, {
+        method: "DELETE",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to delete book: ${response.status}`);
+      }
+
+      setBooks(books.filter((b) => b.id !== bookId));
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setDeletingBookId(null);
+      setIsDeleting(false);
+    }
+  };
+
+  const handleFinished = async (bookId) => {
+    try {
+      const response = await fetch(`${API_BASE}/books/${bookId}`, {
+        method: "PATCH",
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to update book: ${response.status}`);
+      }
+
+      setBooks((prev) =>
+        prev.map((b) => (b.id === bookId ? { ...b, status: "finished" } : b)),
+      );
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  // const handleDelete = (bookId) => {
+  //   setBooks(books.filter((b) => b.id !== bookId));
+  // };
+
   if (isLoading)
     return (
       <div className="app-status">
@@ -60,9 +112,13 @@ function App() {
       <div className="app-section">
         <div className="app-section-head">
           <div className="app-section-title"></div>
-          {books.map((book) => (
-            <span key={book.id}> {book.title} </span>
-          ))}
+          <BookList
+            books={books}
+            onDelete={handleDelete}
+            onFinished={handleFinished}
+            deletingBookId={deletingBookId}
+            isDeleting={isDeleting}
+          />
         </div>
       </div>
     </div>

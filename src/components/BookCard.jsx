@@ -11,7 +11,6 @@ export default function BookCard({
   onDelete,
   onFinished,
   deletingBookId,
-  isDeleting,
 }) {
   return (
     <div className={styles.card}>
@@ -34,10 +33,11 @@ export default function BookCard({
       )}
 
       <button
+        id={book.id}
         type="button"
         className={styles.deleteButton}
         onClick={() => onDelete(book.id)}
-        disabled={isDeleting}
+        disabled={deletingBookId}
       >
         {deletingBookId !== book.id ? "Delete" : "Deleting..."}
       </button>

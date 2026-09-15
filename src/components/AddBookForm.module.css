@@ -62,3 +62,46 @@
   background-color: #ded4ec;
   color: #8d84a0;
 }
+
+.cancelButton {
+  align-self: flex-start;
+  padding: 9px 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background-color: transparent;
+  color: var(--ink-soft);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.cancelButton:hover:not(:disabled) {
+  border-color: var(--ink-soft);
+  color: var(--ink);
+}
+
+.cancelButton:disabled {
+  opacity: 0.5;
+}
+
+/* "+ Add a book" — opens the form, so it's an outline, not a fill. */
+.addButton {
+  padding: 9px 20px;
+  border: 1px dashed var(--lilac);
+  border-radius: var(--radius-pill);
+  background-color: var(--lilac-wash);
+  color: var(--lilac-deep);
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.addButton:hover {
+  border-style: solid;
+  background-color: var(--lilac);
+  color: #3a2c4d;
+}
+
+/* Submit and Cancel sit side by side. */
+.actions {
+  display: flex;
+  gap: 8px;
+}

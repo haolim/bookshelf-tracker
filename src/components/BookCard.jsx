@@ -15,7 +15,7 @@ export default function BookCard({
   return (
     <div className={styles.card}>
       <div className={styles.info}>
-        <h3 className={styles.title}>{book.title} </h3>
+        <h3 className={styles.title}>{book.title}</h3>
         <div className={styles.author}>Author: {book.author}</div>
         <div className={`${styles.badge} ${statusStyle[book.status]}`}>
           Status: {book.status}
@@ -33,11 +33,10 @@ export default function BookCard({
       )}
 
       <button
-        id={book.id}
         type="button"
         className={styles.deleteButton}
         onClick={() => onDelete(book.id)}
-        disabled={deletingBookId}
+        disabled={deletingBookId === book.id}
       >
         {deletingBookId !== book.id ? "Delete" : "Deleting..."}
       </button>

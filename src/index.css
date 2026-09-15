@@ -1,9 +1,7 @@
 /* ==========================================================================
-   index.css — global reset, design tokens, base typography
-   Imported once in src/main.jsx:  import "./index.css";
+   index.css — reset, pastel tokens, base styles
+   import "./index.css";  in src/main.jsx
    ========================================================================== */
-
-@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Karla:wght@400;500;600;700&display=swap");
 
 *,
 *::before,
@@ -12,79 +10,43 @@
 }
 
 :root {
-  /* --- Pastel palette -------------------------------------------------- */
-  --paper: #fbf8fc; /* page background, faint lilac wash */
+  --paper: #faf7fc; /* page background */
   --card: #ffffff;
-  --panel: #f5f0f9; /* recessed surfaces: form, filter bar */
-  --line: #ebe2f2; /* hairline borders */
-
-  --ink: #443a52; /* soft plum-grey, used instead of black */
+  --line: #e9e2f0; /* borders */
+  --ink: #443a52; /* body text */
   --ink-soft: #7c7389; /* secondary text */
 
-  --lilac: #c9b6e4; /* primary accent */
-  --lilac-deep: #6f5194; /* text/icon on lilac */
-  --lilac-wash: #f0e9f8;
+  --lilac: #cbb9e6; /* buttons, focus */
+  --lilac-deep: #6f5194;
+  --lilac-wash: #f1eaf9;
 
-  --mint: #c9e6d4; /* status: finished */
-  --mint-deep: #3d6a50;
-  --peach: #fadac4; /* status: reading */
-  --peach-deep: #94552c;
   --periwinkle: #d5d9f4; /* status: to-read */
   --periwinkle-deep: #4a5093;
-  --blush: #f7cfcf; /* destructive / error */
+  --peach: #fadac4; /* status: reading */
+  --peach-deep: #94552c;
+  --mint: #c9e6d4; /* status: finished */
+  --mint-deep: #3d6a50;
+  --blush: #f7cfcf; /* errors, delete */
   --blush-deep: #8f474c;
 
-  /* --- Shape and depth -------------------------------------------------- */
-  --radius: 14px;
-  --radius-sm: 9px;
+  --radius: 10px;
   --radius-pill: 999px;
-  --shadow-card:
-    0 1px 2px rgba(104, 84, 125, 0.06), 0 6px 18px rgba(104, 84, 125, 0.07);
-  --shadow-lift:
-    0 2px 4px rgba(104, 84, 125, 0.08), 0 12px 26px rgba(104, 84, 125, 0.12);
-
-  /* --- Type ------------------------------------------------------------- */
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body: "Karla", ui-sans-serif, system-ui, -apple-system, sans-serif;
-
-  /* --- Spacing scale ---------------------------------------------------- */
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 24px;
-  --space-6: 32px;
-  --space-7: 48px;
-
-  color-scheme: light;
-}
-
-html {
-  -webkit-text-size-adjust: 100%;
 }
 
 body {
   margin: 0;
   min-height: 100vh;
   background-color: var(--paper);
-  /* two very soft pastel glows, fixed so the page feels like tinted paper */
-  background-image:
-    radial-gradient(
-      44rem 24rem at 12% -8%,
-      rgba(213, 217, 244, 0.55),
-      transparent 60%
-    ),
-    radial-gradient(
-      38rem 22rem at 96% 4%,
-      rgba(250, 218, 196, 0.45),
-      transparent 62%
-    );
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   color: var(--ink);
-  font-family: var(--font-body);
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    sans-serif;
   font-size: 16px;
-  line-height: 1.55;
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -92,18 +54,14 @@ h1,
 h2,
 h3 {
   margin: 0;
-  font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.15;
-  letter-spacing: -0.01em;
+  line-height: 1.2;
 }
 
 p {
   margin: 0;
 }
 
-ul,
-ol {
+ul {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -122,25 +80,12 @@ button:disabled {
 }
 
 input,
-select,
-textarea {
+select {
   font: inherit;
   color: inherit;
 }
 
-/* One focus style for the whole app, tuned to the pastel background. */
 :focus-visible {
   outline: 2px solid var(--lilac-deep);
   outline-offset: 2px;
-  border-radius: var(--radius-sm);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
 }

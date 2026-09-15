@@ -1,16 +1,18 @@
-# React + Vite
+# Bookshelf Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React app for logging books you are reading, have finished, or want to read. The book list is stored in a local json-server API, with add, delete, and status updates going over HTTP.
 
-Currently, two official plugins are available:
+Built for the assignment **Lists, Asynchronous Programming, and Side Effects**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+![Bookshelf Tracker screenshot](./screenshot.png)
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Book list:** fetched from json-server when the app mounts. Each card shows the title, author, and a status badge. An empty list shows "No books yet. Add one below!"
+- **Loading and error states:** a "Loading books..." message replaces the list while the fetch runs. A failed request shows an error message. Errors from add, delete, and update actions would be displayed above the list.
+- **Add books:** a form with title, author, and a status select (to-read/reading/finished). A POST is performed to add a book. Cancel clears and closes the form.
+- **Delete books:** each card has a Delete button with a confirmation prompt. The book is removed after the server confirms.
+- **Per-card delete state:** only the book being deleted shows a "Deleting..." label. The other cards are unaffected.
+- **Mark as finished:** a PATCH request updates just the status field. The button is hidden once a book is already finished.
+- **Status filter:** All / To Read / Reading / Finished. The filtered list is derived from the books array and the selected filter.
+- **Status styling:** each badge is coloured by reading status.

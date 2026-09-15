@@ -1,35 +1,22 @@
 /* ==========================================================================
    BookList.module.css
    import styles from "./BookList.module.css";
-   Classes: list, empty, emptyTitle, emptyText
+   Classes: list, empty
    ========================================================================== */
 
 .list {
   display: flex;
   flex-direction: column;
-  gap: var(--space-3);
+  gap: 10px;
 }
 
-/* --- Empty state ---------------------------------------------------------
-   A dashed pastel outline reads as a gap on the shelf waiting to be filled. */
-
+/* "No books yet. Add one below!" */
 .empty {
-  padding: var(--space-6) var(--space-5);
+  padding: 24px;
   text-align: center;
   background-color: var(--lilac-wash);
-  border: 2px dashed var(--lilac);
+  border: 1px dashed var(--lilac);
   border-radius: var(--radius);
-}
-
-.emptyTitle {
-  font-family: var(--font-display);
-  font-size: 1.125rem;
-  font-weight: 600;
   color: var(--lilac-deep);
-}
-
-.emptyText {
-  margin-top: var(--space-2);
-  color: var(--ink-soft);
   font-size: 0.9375rem;
 }

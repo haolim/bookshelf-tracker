@@ -122,7 +122,7 @@ function App() {
     return (
       <div className="app">
         <div className="app-section">
-          <div className="app-loading">Loading books</div>
+          <div className="app-loading">Loading books...</div>
         </div>
       </div>
     );
@@ -137,12 +137,15 @@ function App() {
   return (
     <div className="app">
       <h1 className="app-title">Bookshelf Tracker</h1>
+      {error && <div className="app-error">{error}</div>}
 
-      <div className="app-status">
-        {error && <div className="app-error">{error}</div>}
+      <div className="app-section">
+        <AddBookForm onAdd={handleAddBook} isAdding={isAdding} />
       </div>
       <div className="app-section">
-        <h2 className="app-section-title">Your books</h2>
+        <div className="app-section-head">
+          <h2 className="app-section-title">Your books</h2>
+        </div>
       </div>
       <div className={"app-filter"}>
         {readingStatus.map((s) => (
@@ -157,17 +160,12 @@ function App() {
           </button>
         ))}
       </div>
-      <div className="app-section">
-        <AddBookForm onAdd={handleAddBook} isAdding={isAdding} />
-      </div>
-      <div className="app-section">
-        <BookList
-          books={filteredBooks}
-          onDelete={handleDelete}
-          onFinished={handleFinished}
-          deletingBookId={deletingBookId}
-        />
-      </div>
+      <BookList
+        books={filteredBooks}
+        onDelete={handleDelete}
+        onFinished={handleFinished}
+        deletingBookId={deletingBookId}
+      />
     </div>
   );
 }

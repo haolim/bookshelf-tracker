@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import BookList from "./components/BookList";
+import AddBookForm from "./components/AddBookForm";
 
 const API_BASE = "http://localhost:3001";
 
@@ -8,20 +9,19 @@ function App() {
   const [books, setBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [isError, setIsError] = useState(false);
   const [deletingBookId, setDeletingBookId] = useState(null);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const [isAdding, setIsAdding] = useState(false);
+  const [statusFilter, setStatusFilter] = useState("all");
 
   useEffect(() => {
     const loadBooks = async () => {
       setIsLoading(true);
       setError("");
-      setIsError(false);
-
-      // Set a delay
-      await new Promise((resolve) => setTimeout(resolve, 3000));
 
       try {
+        // Set a delay
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
         const response = await fetch(`${API_BASE}/books`);
 
         if (!response.ok) {
@@ -32,7 +32,6 @@ function App() {
 
         setBooks(data);
       } catch (err) {
-        setIsError(true);
         setError(err.message);
       } finally {
         setIsLoading(false);
@@ -42,16 +41,47 @@ function App() {
     loadBooks();
   }, []);
 
+  const filteredBooks = books.filter(
+    (b) => statusFilter === "all" || b.status === statusFilter,
+  );
+
+  const handleAddBook = async (newBook) => {
+    setIsAdding(true);
+
+    try {
+      // Set a delay
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
+      const response = await fetch(`${API_BASE}/books`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(newBook),
+      });
+
+      if (!response.ok) {
+        throw new Error(`Failed to add book: ${response.status}`);
+      }
+
+      const created = await response.json();
+
+      setBooks((prev) => [...prev, created]);
+      return true;
+    } catch (err) {
+      setError(err.message);
+      return false;
+    } finally {
+      setIsAdding(false);
+    }
+  };
+
   const handleDelete = async (bookId) => {
     if (!window.confirm("Are you sure you want to delete this book?")) return;
 
     setDeletingBookId(bookId);
-    setIsDeleting(true);
-
-    // Set a delay
-    await new Promise((resolve) => setTimeout(resolve, 3000));
-
     try {
+      // Set a delay
+      await new Promise((resolve) => setTimeout(resolve, 2000));
+
       const response = await fetch(`${API_BASE}/books/${bookId}`, {
         method: "DELETE",
       });
@@ -60,12 +90,11 @@ function App() {
         throw new Error(`Failed to delete book: ${response.status}`);
       }
 
-      setBooks(books.filter((b) => b.id !== bookId));
+      setBooks((prev) => prev.filter((b) => b.id !== bookId));
     } catch (err) {
       setError(err.message);
     } finally {
       setDeletingBookId(null);
-      setIsDeleting(false);
     }
   };
 
@@ -73,6 +102,8 @@ function App() {
     try {
       const response = await fetch(`${API_BASE}/books/${bookId}`, {
         method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ status: "finished" }),
       });
 
       if (!response.ok) {
@@ -87,39 +118,55 @@ function App() {
     }
   };
 
-  // const handleDelete = (bookId) => {
-  //   setBooks(books.filter((b) => b.id !== bookId));
-  // };
-
   if (isLoading)
     return (
-      <div className="app-status">
-        <div className="app-status-loading">Loading books</div>
-        <div className="app-spinner"></div>
+      <div className="app">
+        <div className="app-section">
+          <div className="app-loading">Loading books</div>
+        </div>
       </div>
     );
-  if (isError)
-    return (
-      <div className="app-status">
-        <div className="app-status-error">{error}</div>
-      </div>
-    );
+
+  const readingStatus = [
+    { value: "all", label: "All" },
+    { value: "to-read", label: "To Read" },
+    { value: "reading", label: "Reading" },
+    { value: "finished", label: "Finished" },
+  ];
+
   return (
     <div className="app">
-      <span></span>
-      <span></span>
-      <span></span>
+      <h1 className="app-title">Bookshelf Tracker</h1>
+
+      <div className="app-status">
+        {error && <div className="app-error">{error}</div>}
+      </div>
       <div className="app-section">
-        <div className="app-section-head">
-          <div className="app-section-title"></div>
-          <BookList
-            books={books}
-            onDelete={handleDelete}
-            onFinished={handleFinished}
-            deletingBookId={deletingBookId}
-            isDeleting={isDeleting}
-          />
-        </div>
+        <h2 className="app-section-title">Your books</h2>
+      </div>
+      <div className={"app-filter"}>
+        {readingStatus.map((s) => (
+          <button
+            className={`app-filter-button ${
+              statusFilter === s.value ? "is-active" : ""
+            }`}
+            key={s.value}
+            onClick={() => setStatusFilter(s.value)}
+          >
+            {s.label}
+          </button>
+        ))}
+      </div>
+      <div className="app-section">
+        <AddBookForm onAdd={handleAddBook} isAdding={isAdding} />
+      </div>
+      <div className="app-section">
+        <BookList
+          books={filteredBooks}
+          onDelete={handleDelete}
+          onFinished={handleFinished}
+          deletingBookId={deletingBookId}
+        />
       </div>
     </div>
   );

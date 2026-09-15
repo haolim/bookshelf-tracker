@@ -6,7 +6,6 @@ export default function BookList({
   onDelete,
   onFinished,
   deletingBookId,
-  isDeleting,
 }) {
   return (
     <>
@@ -26,7 +25,6 @@ export default function BookList({
                 onDelete={onDelete}
                 onFinished={onFinished}
                 deletingBookId={deletingBookId}
-                isDeleting={isDeleting}
               />
             </li>
           ))}

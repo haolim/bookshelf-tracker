@@ -10,12 +10,7 @@ export default function BookList({
   return (
     <>
       {books.length === 0 ? (
-        <div className={styles.empty}>
-          <div className={styles.emptyTitle}>
-            <div className={styles.emptyText}></div>
-            No books yet. Add one below!
-          </div>
-        </div>
+        <div className={styles.empty}>No books yet. Add one!</div>
       ) : (
         <ul className={styles.list}>
           {books.map((b) => (
